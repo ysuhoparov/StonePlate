@@ -1,0 +1,31 @@
+CREATE PROCEDURE cgraph
+ as
+begin
+    DECLARE @step INT=5;
+    DECLARE @i INT=1;
+    DECLARE @n INT;
+    DECLARE @xl INT, @xr INT;
+
+  select @n = count(*)  from slabs;
+  IF (@n <2 ) return(-1);
+
+  select @xl=edgel from slabs where slabid=1;
+  select @xr=edger from slabs where slabid=1;
+
+  delete from graphs;
+ 
+  insert  into graphs( graphid, edgel1, edgel2, edger1, edger2, egY1, egY2) values(0, @xl,@xl, @xl,@xr, @step,@step);
+
+  WHILE @i < @n 
+   begin
+    select @xl=edgel from slabs where slabid=@i;
+	select @xr=edger from slabs where slabid=@i;
+	insert into graphs (graphid, edgel1, edgel2,edger1, edger2, egY1, egY2) values( @i, @xl,0, @xr,0, @i*@step,(@i+1)*@step );
+
+	select @xl=edgel from slabs where slabid=@i+1;
+	select @xr=edger from slabs where slabid=@i+1;
+	update graphs set edgel2=@xl, edger2=@xr where graphid=@i;
+    set @i += 1;
+   end;
+   insert into graphs (graphid, edgel1, edgel2,edger1, edger2, egY1, egY2) values( @i, @xl,@xl, @xl,@xr, @i*@step,@i*@step );
+end; 

@@ -1,0 +1,78 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Каменная плита</title>
+</head>
+<body>
+    <div> 
+        <h3>Каменная плита</h3>
+        
+        <svg width="@ViewBag.Width"; height="@ViewBag.Height";>
+            <rect fill="#f1f1f1"   width="@ViewBag.Width"   height="@ViewBag.Height" />
+            @foreach (var b in ViewBag.Graphs)
+            { 
+                <line stroke="black"
+                  x1="@b.edgeL1" y1="@b.egY1"
+                  x2="@b.edgeL2" y2="@b.egY2" />
+                <line stroke="black"
+                  x1="@b.edgeR1" y1="@b.egY1"
+                  x2="@b.edgeR2" y2="@b.egY2" />
+            }
+
+            @foreach (var b in ViewBag.Dimensions)
+            {
+                <line stroke="gray"
+                      x1="@b.x1" y1="@b.y1"
+                      x2="@b.x2" y2="@b.y2" />
+            }
+
+            <!--  <rect x="50" y="10" width="180" height="250" fill="#11149A" />   /-->
+            <rect fill="#1f1" x="@ViewBag.xRect" y="@ViewBag.yRect" width="@ViewBag.WidthRect" height="@ViewBag.HeightRect" />
+
+            @foreach (var b in ViewBag.xTiles)
+            {
+                <line stroke="red"
+                      x1="@b" y1="@ViewBag.yRect"
+                      x2="@b" y2="@ViewBag.BottRect" />
+            }
+
+            @foreach (var b in ViewBag.yTiles)
+            {
+                <line stroke="red"
+                      x1="@ViewBag.xRect" y1="@b"
+                      x2="@ViewBag.RRect" y2="@b" />
+            }
+
+
+
+
+        </svg>     
+
+        </div>
+        <div>
+            <h3>Размерная плитка</h3>
+            <table>
+                <tr>
+                    <td>xLen</td>
+                    <td>yLen</td>
+                    <td>quantity</td>
+                    <td></td>
+                </tr>
+                @foreach (var b in ViewBag.Tiles)
+                {
+                    <tr>
+                        <td>@b.xLen</td>
+                        <td>@b.yLen</td>
+                        <td>@b.quantity</td>
+                    </tr>
+                }
+            </table>
+        </div>
+</body>
+</html>

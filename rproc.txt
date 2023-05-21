@@ -1,0 +1,118 @@
+
+CREATE PROCEDURE books (IN num INT)
+  begin
+    DECLARE i INT DEFAULT 0;
+    IF (num>0) THEN
+        wet : WHILE i < num DO
+          IF (i>10) THEN LEAVE wet;
+          ENF IF;
+          SELECT magazine_incoming.id_incoming, products.name, products.author, magazine_incoming.quantity
+          FROM magazine_incoming, products
+          WHERE magazine_incoming.id_product=products.id_product AND magazine_incoming.id_incoming=i;
+          SET i=i+1;
+       END WHILE wet;
+    ELSE
+        SELECT	'Задайте правильный параметр';
+    END IF;
+  end
+//
+select max(edgeR1) from graphs
+
+
+CREATE PROCEDURE coordgraph ()
+ begin
+    DECLARE step INT DEFAULT 5;
+    DECLARE i INT DEFAULT 1;
+    DECLARE n INT DEFAULT 0;
+    DECLARE xl INT DEFAULT 0;
+    DECLARE xr INT DEFAULT 0;
+
+ select count(*) to n from slabs;
+
+ IF (n > 1) THEN
+
+  select egdel INTO xl, egder INTO xr from slabs where id==1;
+  delete from graphs;
+  insert 1, xl,xl, xl,xr, step,step into graphs;
+
+  wet : WHILE i < n DO
+	select egdel to xl, egder to xr from slabs where id==i;
+	insert i+1, xl,0, xr,0,i*step,(i+1)*step into graphs id, egdel1, egdel2,egder1, egder2, egY1, egY2;
+	select egdel to xl, egder to xr from slabs where id=i+1;
+	update graphs set egdel2=xl, egder2=xr where id=i;
+        SET i=i+1;
+  END WHILE wet;
+
+  insert i, xl,xl, xl,xr, i*step,(i+1)*step into graphs;
+
+ END IF;
+end
+//
+
+Запуск calkcoordgraf по изменению номера активной плиты
+  select pameter_value INTO step from s_config where name =step to n from slabs  // добавить после созд. табл
+
+
+
+slabs  - a start
+int n, i, xr, xl
+
+
+
+select count(*) to n from slabs
+if n<2 exit
+
+select egdel to xl, egder to xr from slabs
+where id==1
+
+delete from coordgraf
+insert 1, xl,xl, xl,xr, step,step into coordgraf // верхняя линия
+
+for {i=1; i < n; i++)
+{
+
+select egdel to xl, egder to xr from slabs
+where id==i
+
+insert i+1, xl,0, xr,0,i*step,(i+1)*step into coordgraf id, egdel1, egdel2,egder1, egder2, egY1, egY2,
+
+
+
+select egdel to xl, egder to xr from slabs
+where id==i+1
+
+update coordgraf set egdel2=xl, egder2=xr,
+where id==i
+}
+
+insert i, xl,xl, xl,xr, i*step,(i+1)*step into coordgraf  // // нижняя линия
+
+
+
+
+
+2
+
+Линии размера габарита  по вертикали
+
+top
+egder[0] step   vertdimension   step
+
+bott
+egder[n] n*step   vertdimension   n*step
+
+
+
+
+
+
+
+max(egdel) id ,    max(egder) id
+
+
+
+
+  min(egder)
+
+ min(egdel)
+
